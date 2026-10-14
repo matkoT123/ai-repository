@@ -1,6 +1,6 @@
 {
   "name": "work-skills",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Adit/Asseco work skills. They print git commands for the user and never push.",
   "author": { "name": "Martin Tremko" }
 }

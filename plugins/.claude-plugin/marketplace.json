@@ -1,6 +1,8 @@
 {
   "name": "tremko-context",
-  "owner": { "name": "Martin Tremko" },
+  "owner": {
+    "name": "Martin Tremko"
+  },
   "metadata": {
     "description": "Personal Claude Code marketplace: safety guards, platform agents, work and personal skills.",
     "version": "0.1.0"
@@ -27,8 +29,8 @@
     {
       "name": "work-skills",
       "source": "./work-skills",
-      "description": "Adit/Asseco skills: commit and sync commands, Filip audit, worklog, Jira comment, bug report.",
-      "version": "0.2.0"
+      "description": "Adit/Asseco skills: commit and sync commands, Filip audit, worklog, task description with estimate, ticket reply, daily summary, Jira comment, bug report.",
+      "version": "0.3.0"
     }
   ]
 }

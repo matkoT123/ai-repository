@@ -24,7 +24,7 @@ Modules: `app`, `core`, `domain`, `data`, `data-networking`, `presentation`, `in
 | `asseco_roz`, `asseco_bud`, `asseco_vyv`, `asseco_test` | `hlt-<x>.asseco-ce.com/mobile/` | HLT public envs |
 Testing runs on HLT ROZ; when test data is missing, ask for an account from Andrea or use the one named in the ticket.
 Current working HLT tier: **ROZ** (confirmed 2026-10-10). It can flip before releases; if something points to BUD, ask. `vszp_demo` (ZLP3) builds for VšZP testers are made by colleagues with ZLP3 access; the user has no access to ZLP3, so never plan steps that need it.
-Test logins: `secrets/work.env: VSZP_TEST_USER, VSZP_TEST_PASSWORD, VSZP_HLT_SMS_CODE, VSZP_DEBUG_UNLOCK_PIN`. HLT rejects trivial PINs (e.g. sequences).
+Test logins: `secrets/work.env: VSZP_TEST_USER, VSZP_TEST_PASSWORD, VSZP_HLT_SMS_CODE, VSZP_DEBUG_UNLOCK_PIN`. HLT rejects trivial PINs (e.g. sequences). App PIN on a test device: never try an old PIN; always `pm clear` (or reinstall), log in with the test login and set a new non-trivial PIN yourself, without asking.
 
 ### Integration switch (local only, never staged)
 - "ROZ"/"BUD" for `asseco_vpn`: swap the host in both `centralUrl` and `assecoOnboardingUrl`.

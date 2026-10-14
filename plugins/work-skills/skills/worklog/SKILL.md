@@ -25,11 +25,13 @@ Produce a ready-to-paste Slovak worklog description. Nothing else around it exce
 
 ## Output
 
-```
-<worklog text>
-```
+The terminal indents every line of a reply, so text copied from the chat carries leading spaces. Put the text into the clipboard instead:
 
-Optionally one line: "Vynechane (neoverene): ...". If the user says "skrat", shorten keeping all topics.
+1. Copy it with the PowerShell tool: `Set-Clipboard -Value '<worklog text>'` (double every `'` inside the text). Plain text only: no code block, no quotes around it, no leading or trailing spaces, no trailing newline.
+2. In the chat show the text once as a plain paragraph for review and add one line: "Skopirovane do schranky."
+3. If the clipboard call fails, say so and show the text in a code block as a fallback.
+
+Optionally one line: "Vynechane (neoverene): ...". If the user says "skrat", shorten keeping all topics and copy the new version again.
 
 Example of the tone:
 `Overenie v kóde, kam aplikácia ukladá OCRA profil a ako sa počítajú countery. Príprava podkladov k blokerom novej SDK pre analytika. Oprava volania deactivate() pri zrušení aktivácie.`
