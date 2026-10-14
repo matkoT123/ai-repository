@@ -24,7 +24,7 @@
       "name": "personal-skills",
       "source": "./personal-skills",
       "description": "Personal project skills: Balansee server check and others.",
-      "version": "0.1.0"
+      "version": "0.2.0"
     },
     {
       "name": "work-skills",

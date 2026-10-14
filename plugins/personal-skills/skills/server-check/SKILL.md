@@ -5,38 +5,26 @@ description: Read-only health snapshot of the Balansee production server over SS
 
 # Server check - Balansee production
 
-One SSH call, read-only. Server facts: `G:/personal-projects/tremko/ai-logic-claude-context/contexts/personal/balansee/infra.md`.
+Read-only, through Claude's own restricted key. Server facts: `G:/personal-projects/tremko/ai-logic-claude-context/contexts/personal/balansee/infra.md`.
 
 ## Rules
-- Alias **`balansee-prod-new`** from `~/.ssh/config` (root, Hetzner, stack in `/opt/Balansee-INFRA`). Never use the dead alias `balansee-server`. Never read key files.
-- Read-only only: `docker ps/logs/inspect`, env **presence** checks, `free`, `df`. No restart, `up -d`, prune, edits or SQL writes; for those show the command and wait for the user's go.
-- Never print env values or tokens. If the connection fails, say so; do not guess credentials.
+- Alias **`balansee-readonly`** from `~/.ssh/config`: Claude's own key, forced on the server to `/usr/local/bin/claude-readonly.sh` (source: `remote/claude-readonly.sh` next to this file). It can only run `check` and `logs <service> [n]`; any other command is refused by the server.
+- The user's full-access alias `balansee-prod-new` (root, Hetzner, stack in `/opt/Balansee-INFRA`) has no allow rule: use it only for a concrete fix the user approved, showing the exact command first. Never use the dead alias `balansee-server`. Never read key files.
+- No restart, `up -d`, prune, edits or SQL writes without the user's go.
+- Never print env values or tokens. If the connection fails, say so; do not guess credentials. If `balansee-readonly` is not set up yet, tell the user the setup steps (below) instead of falling back to the full-access alias.
 
 ## Run
 ```bash
-ssh balansee-prod-new 'bash -s' << 'REMOTE'
-echo "=== containers ==="
-docker ps -a --filter "label=com.docker.compose.project=balansee" --format "table {{.Names}}\t{{.Status}}\t{{.Image}}"
-
-for SVC in backend ai-module ntf-module audit-module keycloak; do
-  C=$(docker ps -a --format '{{.Names}}' | grep -m1 -- "balansee-$SVC-" || true)
-  [ -z "$C" ] && { echo; echo "!! $SVC: container not found"; continue; }
-  echo; echo "=== $C ==="
-  docker inspect "$C" --format 'State={{.State.Status}} RestartCount={{.RestartCount}} OOMKilled={{.State.OOMKilled}} StartedAt={{.State.StartedAt}}'
-  echo "--- errors in last 300 log lines ---"
-  docker logs "$C" --tail 300 2>&1 | grep -E "ERROR|Exception|Caused by" | tail -15
-done
-
-echo; echo "=== env presence (values never printed) ==="
-check() { C=$(docker ps --format '{{.Names}}' | grep -m1 -- "balansee-$1-" || true); [ -z "$C" ] && return
-  for V in $2; do docker exec "$C" sh -c "[ -n \"\$$V\" ]" && echo "$1 $V=set" || echo "$1 $V=MISSING"; done; }
-check ai-module "OPENAI_API_KEY SPRING_DATASOURCE_URL"
-check backend "SPRING_DATASOURCE_URL ENCRYPTION_KEY KEYCLOAK_SERVICE_CLIENT_SECRET"
-
-echo; echo "=== host ==="
-free -h; df -h / | tail -1
-REMOTE
+ssh balansee-readonly check
+ssh balansee-readonly logs backend 300     # services: backend ai-module ntf-module audit-module keycloak; max 1000 lines
 ```
+
+## One-time setup (the user does it)
+1. Key `~/.ssh/balansee_claude_agent` (ed25519, exists or `ssh-keygen -t ed25519 -f ~/.ssh/balansee_claude_agent -C claude-agent`).
+2. On the server: copy `remote/claude-readonly.sh` to `/usr/local/bin/claude-readonly.sh`, `chmod 755`, and add to `/root/.ssh/authorized_keys`:
+   `command="/usr/local/bin/claude-readonly.sh",no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty <public key>`
+3. In `~/.ssh/config`: `Host balansee-readonly` with the same `HostName` and `User` as `balansee-prod-new`, `IdentityFile ~/.ssh/balansee_claude_agent`, `IdentitiesOnly yes`.
+4. Allow rule `Bash(ssh balansee-readonly *)` in the user settings.
 
 ## Report
 Summarize, do not dump raw output:

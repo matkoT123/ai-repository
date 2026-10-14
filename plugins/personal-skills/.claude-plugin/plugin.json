@@ -1,6 +1,8 @@
 {
   "name": "personal-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Skills for personal projects (Balansee server check and others).",
-  "author": { "name": "Martin Tremko" }
+  "author": {
+    "name": "Martin Tremko"
+  }
 }
