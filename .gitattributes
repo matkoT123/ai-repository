@@ -1,0 +1,2 @@
+*.sh text eol=lf
+bin/claude-asseco text eol=lf
