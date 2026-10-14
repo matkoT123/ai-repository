@@ -9,11 +9,18 @@ Produce a task title for the timesheet and a time estimate. Nothing else around 
 
 ## Style
 
-- Past participle plus noun, as the user wants it: "Opravená aktivácia mTokenu", "Doplnená validácia rodného čísla", "Upravené ukladanie OCRA profilu". Not "sme", not "som", not "Oprava ..." (that form is for the worklog skill).
-- One short line, ideally under 80 characters. More lines only if the user lists several separate tasks; then one task per line.
+- Imperfective verbal nouns (-anie / -ovanie), as the user wants it: "Prerábanie obnovy tokenu na SDK", "Upratovanie logovania", "Odstraňovanie starých REST volaní", "Písanie unit testov". Not past participles ("Migrovaná obnova", "Upratané logovanie"), not perfective nouns ("Upratanie", "Oprava"), not "sme" or "som". The user finds those robotic.
+- Natural wording, the way a developer says it to a colleague: "aby sa chyby zo SDK nelogovali dvakrát" instead of "zdeduplikované logovanie".
+- Length: a title, then one sentence of 2 to 4 activities joined by commas and "a". Roughly 200 to 300 characters per task. Name the main class or SDK function once (`AccessTokenRepository`, `mToken.authenticateFirstLevel()`), but leave out lists of endpoints, DTOs, counts of tests or call sites, and internal details such as cache timeouts.
+- Ticket prefix `<TICKET> - ` when the user gives one.
+- Several tasks: one paragraph per task, separated by an empty line.
 - Clean text: no bullets, no numbering, no leading hyphens, no trailing period, no quotes.
 - Project terminology and names (mToken, OCRA, SDK, countery), not paraphrases.
 - Slovak with proper diacritics. Hyphens only, never em or en dashes. No AI filler ("úspešne", "komplexne").
+
+## Splitting or shortening a task
+
+When the user pastes a long description and asks to split it (e.g. into 2 tasks of 4h), group the work by topic so that each task is one coherent piece of work. Keep every main point, but drop the detail. Use the hours the user gives.
 
 ## Estimate
 
@@ -27,10 +34,13 @@ Produce a task title for the timesheet and a time estimate. Nothing else around 
 
 The terminal indents every line of a reply, so text copied from the chat carries leading spaces. Put the result into the clipboard:
 
-1. Copy with the PowerShell tool: `Set-Clipboard -Value '<title>'` (double every `'`). If the user wants the estimate copied too, put it on a second line. Plain text, no leading or trailing spaces.
-2. In the chat show the title and the estimate as plain lines for review and add one line: "Skopirovane do schranky."
+1. Copy with the PowerShell tool: `Set-Clipboard -Value '<text>'` (double every `'`; use "`r`n" in a double-quoted string for line breaks). Copy the descriptions only. Copy the estimates too only when the user asks for them. Plain text, no leading or trailing spaces.
+2. In the chat, show each description with its `Odhad:` line for review and add one line: "Skopirovane do schranky."
 3. If the clipboard call fails, say so and show the text in a code block as a fallback.
 
-Example:
-Opravená aktivácia mTokenu pri zrušení profilu
-Odhad: 3h
+Example (one task split into two):
+<TICKET> - Prerábanie obnovy tokenu na SDK a odstraňovanie nepoužívaného podpisovania. Prepisovanie AccessTokenRepository do Kotlinu nad mToken.authenticateFirstLevel(), odstraňovanie starých REST volaní a písanie unit testov
+Odhad: 4h
+
+<TICKET> - Upratovanie logovania, aby sa chyby zo SDK nelogovali dvakrát. Prechádzanie logovania v aplikácii a v SDK, odstraňovanie duplicitných záznamov na server a spisovanie podkladu pre analytikov, čo aplikácia loguje a prečo to nepatrí do SDK
+Odhad: 4h

@@ -25,13 +25,49 @@ contexts/
   personal/                balansee, andrej-razus, cunikova, me, hobby
 plugins/
   .claude-plugin/marketplace.json
-  guard/                   push guard hook (work hosts never, personal only on request)
+  guard/                   push guard + account guard hooks
   dev-agents/              springboot, android, angular, react
-  work-skills/             asseco-commit, adit-asseco-sync, filip-audit, worklog, jira-comment, bug-report
+  work-skills/             work skills (table below)
+  personal-skills/         personal skills (table below)
+bin/                       claude-asseco wrappers (ps1, cmd, bash), installed to ~/.local/bin
 settings/                  settings fragments merged by install.ps1
 secrets/                   LOCAL ONLY, gitignored (template committed)
 install.ps1                writes stub CLAUDE.md files into roots, registers marketplace
 ```
+
+## Two accounts
+
+| Command | Profile | Account | Use |
+|---|---|---|---|
+| `claude` | `~/.claude` | tremko@adit.sk (ADIT) | personal and Adit work |
+| `claude-asseco` | `~/.claude-asseco` | martin.tremko@asseco-int.com | Asseco projects only |
+
+Type the command at the shell prompt, not inside a running session. Before `/login`, check the email in `/status`: `/login` always changes the profile of the running session. The guard checks the real logged-in email: the Asseco account is blocked outside Asseco folders in any profile, the default profile in Asseco folders gets a loud warning.
+
+## Skills
+
+Use them in plain words ("napis worklog, dnes som ...") or directly as `/<name> <text>`. `/skills` lists them. Text skills put the result into the clipboard, because the terminal indents copied lines.
+
+| Skill | What it does | Example trigger |
+|---|---|---|
+| `worklog` | Slovak Jira worklog text, impersonal noun form, to clipboard | "napis worklog" |
+| `task-popis` | Task description for the timesheet plus time estimate, to clipboard | "popis tasku", "odhad" |
+| `denny-sumar` | Standup and worklog text from today's git log | "denny sumar", "standup" |
+| `odpoved-ticket` | Short factual reply to a tester or colleague, to clipboard | "odpoved testerovi" |
+| `jira-comment` | Slovak Jira comment for incidents and bug analyses | "jira komentar" |
+| `bug-report` | Bug report, developer or tester variant | "bug report" |
+| `asseco-commit` | Squash commit with the correct author, prints push commands | "commit do asseca" |
+| `adit-asseco-sync` | Fast-forward sync of a branch between remotes, prints push command | "sync adit asseco" |
+| `filip-audit` | Read-only check that a colleague's traces are not in Asseco-bound commits | "filip audit" |
+| `resync-colleague-branch` | Cherry-pick a colleague's new commits into the re-authored copy | "dosync filipa" |
+| `server-check` (personal) | Read-only Balansee production server health check over SSH | "skontroluj server" |
+
+## Changing a plugin
+
+1. Edit files under `plugins/<plugin>/`, bump `version` in its `plugin.json` and in `marketplace.json`.
+2. Commit and push.
+3. For both profiles: `claude plugin marketplace update tremko-context` and `claude plugin update <plugin>@tremko-context` (same with `claude-asseco`).
+4. `/reload-plugins` in open sessions.
 
 ## Conventions
 
