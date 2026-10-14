@@ -11,8 +11,8 @@
     {
       "name": "guard",
       "source": "./guard",
-      "description": "Blocks git push to work repositories and hosts; keeps the Asseco account inside Asseco folders.",
-      "version": "0.2.0"
+      "description": "Blocks git push to work repositories and hosts; keeps the monitored work account (checked by real login email) inside its folders.",
+      "version": "0.3.0"
     },
     {
       "name": "dev-agents",
