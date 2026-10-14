@@ -38,6 +38,13 @@ function remotesOf(dir) {
   }
 }
 
+// Only the shell segment with `git push` is checked for host names, so a commit message or a path
+// mentioning a work host elsewhere in the command does not block a personal push.
+// The real push target is still verified through the repository remotes.
+function pushSegment(command) {
+  return command.split(/&&|\|\||[;\n|]/).find((part) => GIT_PUSH.test(part)) || command;
+}
+
 function block(reason) {
   process.stderr.write(
     `BLOCKED by guard plugin: ${reason}\n` +
@@ -48,15 +55,16 @@ function block(reason) {
 
 readStdinJson((input) => {
   const command = (input.tool_input && input.tool_input.command) || '';
-  const match = command.match(GIT_PUSH);
-  if (!match) process.exit(0);
+  if (!GIT_PUSH.test(command)) process.exit(0);
+  const segment = pushSegment(command);
+  const match = segment.match(GIT_PUSH);
 
   const cwd = input.cwd || process.cwd();
   const cdMatch = command.match(/(?:^|[;&|]\s*)(?:cd|Set-Location)\s+("[^"]+"|'[^']+'|\S+)/i);
   const target = match[1] || (cdMatch && cdMatch[1]);
   const repoDir = target ? path.resolve(cwd, normalize(target.replace(/^["']|["']$/g, ''))) : cwd;
 
-  if (WORK_HOST.test(command)) block('push command names a work host.');
+  if (WORK_HOST.test(segment)) block('push command names a work host.');
   if (isUnderWorkRoot(repoDir) || isUnderWorkRoot(cwd)) block(`repository is under a work root (${repoDir}).`);
   if (WORK_HOST.test(remotesOf(repoDir))) block('repository has a work remote (adit/asseco).');
 

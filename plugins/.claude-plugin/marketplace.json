@@ -12,7 +12,7 @@
       "name": "guard",
       "source": "./guard",
       "description": "Blocks git push to work repositories and hosts; keeps the monitored work account (checked by real login email) inside its folders.",
-      "version": "0.3.0"
+      "version": "0.3.1"
     },
     {
       "name": "dev-agents",
