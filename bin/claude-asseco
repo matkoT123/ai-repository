@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Starts Claude Code with the Asseco account (separate config dir, own login).
+unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN CLAUDE_CODE_OAUTH_TOKEN
+export CLAUDE_CONFIG_DIR="$USERPROFILE\\.claude-asseco"
+exec claude "$@"

@@ -1,0 +1,6 @@
+{
+  "name": "guard",
+  "version": "0.2.0",
+  "description": "Safety hooks: blocks any git push to work repositories or work hosts (Adit, Asseco); builds personal repos (Maven/npm) before push; keeps the Asseco account (claude-asseco) inside Asseco folders.",
+  "author": { "name": "Martin Tremko" }
+}

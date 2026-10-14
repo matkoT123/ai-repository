@@ -1,0 +1,6 @@
+{
+  "name": "dev-agents",
+  "version": "0.1.0",
+  "description": "Platform subagents (springboot, android, angular, react) built from best practices across all work and personal projects.",
+  "author": { "name": "Martin Tremko" }
+}

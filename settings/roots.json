@@ -1,0 +1,51 @@
+{
+  "$comment": "Folder -> context files to @import. install.ps1 writes/updates a marked block in <folder>/CLAUDE.md. Parent folders load automatically, so a client folder lists only its client card.",
+  "global": ["core/CLAUDE.md"],
+  "roots": {
+    "G:/nogames/asseco-android": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/asseco/CLAUDE.md"],
+    "G:/nogames/TIPOS-aconsulting-office": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/tipos/CLAUDE.md"],
+    "G:/nogames/nds": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/nds/CLAUDE.md"],
+    "G:/nogames/NDS_FINAL_DUFAM": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/nds/CLAUDE.md"],
+    "G:/nogames/nds-funkcny-exchnage": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/nds/CLAUDE.md"],
+    "G:/nogames/nds-funkcny-hyperv-dc": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/nds/CLAUDE.md"],
+    "G:/nogames/praca": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/nds/CLAUDE.md"],
+    "G:/nogames/claude": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/nds/CLAUDE.md"],
+    "G:/nogames/assecoPodklady": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/asseco/CLAUDE.md"],
+    "G:/nogames/bookadlo": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/bookadlo/CLAUDE.md"],
+    "G:/nogames/TASR": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/tasr/CLAUDE.md"],
+
+    "D:/ACONSULTING_PROJECTS": ["contexts/work/adit/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/MODULES": ["contexts/work/adit/clients/modules/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/UATstack": ["contexts/work/adit/clients/modules/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/ROSA": ["contexts/work/adit/clients/rosa/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/CHATBOT": ["contexts/work/adit/clients/chatbot/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/BOOKADLO": ["contexts/work/adit/clients/bookadlo/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/KDRKO-OLD-BOOKADLO": ["contexts/work/adit/clients/bookadlo/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/NEW_BOOKADLO": ["contexts/work/adit/clients/bookadlo/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/NEW_BOOKADLO2": ["contexts/work/adit/clients/bookadlo/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/TASR": ["contexts/work/adit/clients/tasr/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/skolky": ["contexts/work/adit/clients/skolky/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/NOVONORDISK": ["contexts/work/adit/clients/presales/CLAUDE.md"],
+    "D:/ACONSULTING_PROJECTS/TABLET-TV": ["contexts/work/adit/clients/presales/CLAUDE.md"],
+
+    "D:/MZV": ["contexts/work/adit/CLAUDE.md", "contexts/work/adit/clients/mzv/CLAUDE.md"],
+
+    "C:/PROJECTS": ["contexts/work/adit/CLAUDE.md"],
+    "C:/PROJECTS/ALFABASE": ["contexts/work/adit/clients/alfabase/CLAUDE.md"],
+    "C:/PROJECTS/MonoRepo": ["contexts/work/adit/clients/alfabase/CLAUDE.md"],
+    "C:/PROJECTS/WORK/SHMU": ["contexts/work/adit/clients/shmu/CLAUDE.md"],
+    "C:/PROJECTS/mzv": ["contexts/work/adit/clients/mzv/CLAUDE.md"],
+    "C:/PROJECTS/FILIP_MZV": ["contexts/work/adit/clients/mzv/CLAUDE.md"],
+
+    "C:/SZABOPROJECTS": ["contexts/personal/CLAUDE.md", "contexts/personal/balansee/CLAUDE.md"],
+    "G:/personal-projects": ["contexts/personal/CLAUDE.md"],
+    "G:/personal-projects/szabo": ["contexts/personal/balansee/CLAUDE.md"],
+    "G:/personal-projects/razus": ["contexts/personal/andrej-razus/CLAUDE.md"],
+    "G:/personal-projects/cunikova": ["contexts/personal/cunikova/CLAUDE.md"],
+    "G:/personal-projects/tremko": ["contexts/personal/me/CLAUDE.md"],
+    "D:/ARUPROJECT": ["contexts/personal/CLAUDE.md", "contexts/personal/andrej-razus/CLAUDE.md"],
+    "G:/nogames/OsoboneProjekty": ["contexts/personal/CLAUDE.md"],
+    "G:/nogames/OsoboneProjekty/andrej": ["contexts/personal/andrej-razus/CLAUDE.md"],
+    "G:/nogames/Radka-narodeniny": ["contexts/personal/CLAUDE.md", "contexts/personal/hobby/CLAUDE.md"]
+  }
+}

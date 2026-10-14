@@ -1,0 +1,13 @@
+# secrets never leave this machine
+secrets/*
+!secrets/README.md
+!secrets/*.template
+*.env
+.env*
+*.pem
+*.key
+
+# local scratch
+local/
+*.log
+.claude/settings.local.json

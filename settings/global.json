@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git rebase:*)",
+      "PowerShell(git push:*)",
+      "PowerShell(git commit:*)"
+    ],
+    "deny": [
+      "Read(//g/personal-projects/tremko/ai-logic-claude-context/secrets/*.env)",
+      "Read(//c/Users/marti/.ssh/**)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "tremko-context": {
+      "source": {
+        "source": "directory",
+        "path": "G:/personal-projects/tremko/ai-logic-claude-context/plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "guard@tremko-context": true,
+    "dev-agents@tremko-context": true,
+    "work-skills@tremko-context": true,
+    "personal-skills@tremko-context": true
+  }
+}
