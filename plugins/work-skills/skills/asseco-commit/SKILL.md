@@ -12,7 +12,7 @@ Goal: the user types a short phrase and gets, fast, a short checklist result plu
 - Claude NEVER pushes, never force-pushes, never resets, never squashes, never creates MRs. Print commands only.
 - Claude MAY run read-only git: `fetch`, `log`, `diff`, `cherry`, `remote -v`, `rev-parse`, `merge-base`, `ls-remote`, `branch -vv`, `merge-tree --write-tree` (dry run). Anything not clearly read-only counts as write.
 - Allowed authors on Asseco git: `Martin Tremko <tremko@adit.sk>` (default) and Vladimir Jurenka (ask the user for his email, never invent it). Never `tremko@aconsulting.sk` either, always `tremko@adit.sk`.
-- Filip Zemla (`zemla`, `filip`, `aconsulting`) must never appear in Asseco git: not as author, committer, in messages, trailers or code.
+- Filip Zemla: his commits as `zemla@adit.sk` dated 2026-10-20 or later are allowed on Asseco (Asseco colleague since then). His older commits and any `aconsulting` identity must never appear in Asseco git: not as author, committer, in messages or trailers. Squashing his older work into the user's commit stays the way to bring it over.
 - Never guess a ticket number. If the commit message needs one and the user did not give it, ask. There are no default ticket numbers.
 - Commit only code that builds. No `Co-Authored-By`, no AI attribution.
 - Output to the user in Slovak. Hyphens only, no em or en dashes.

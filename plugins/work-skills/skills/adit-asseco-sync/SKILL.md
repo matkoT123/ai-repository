@@ -11,7 +11,7 @@ Fast-forward-only sync of one branch between ADIT and ASSECO remotes. Output a s
 
 - Claude never pushes. It may run `fetch`, `log`, `remote -v`, `merge-base`, `ls-remote`.
 - Never force-push in this skill. Divergence = stop and ask.
-- Filip Zemla must never reach Asseco: check before any adit > Asseco push.
+- Filip Zemla commits dated before 2026-10-20 (and any `aconsulting` identity) must never reach Asseco: check before any adit > Asseco push. His commits as `zemla@adit.sk` from 2026-10-20 are allowed.
 
 ## Step 1 - resolve remotes by URL
 

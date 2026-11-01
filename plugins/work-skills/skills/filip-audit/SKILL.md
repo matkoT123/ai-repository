@@ -11,7 +11,7 @@ Read-only. Claude runs the commands itself and reports in Slovak, compact. Never
 
 ## Rule being checked
 
-Filip Zemla (`zemla@aconsulting.sk`, any `filip`, `zemla`, `žemla`, `aconsulting` identity) must never appear anywhere in Asseco git, and never on adit `main`. Not as author, committer, in commit messages, `Co-Authored-By`/`Signed-off-by` trailers, code, comments or `@author` tags. Allowed authors on Asseco: Martin Tremko `tremko@adit.sk`, Vladimir Jurenka. `tremko@aconsulting.sk` is not Filip but is also unwanted on Asseco (should be `tremko@adit.sk`): report it as a warning.
+Filip Zemla is an Asseco colleague since 2026-10-20: his commits as `zemla@adit.sk` with author date 2026-10-20 or later are allowed on Asseco (report them as "povolene", not as a hit). His commits dated before 2026-10-20 and any `aconsulting` identity (`zemla@aconsulting.sk` etc.) must never appear in Asseco git, and Filip never on adit `main`. Not as author, committer, in commit messages, `Co-Authored-By`/`Signed-off-by` trailers. Allowed authors on Asseco: Martin Tremko `tremko@adit.sk`, Vladimir Jurenka, Filip Zemla `zemla@adit.sk` (from 2026-10-20). Use `--format='%ad ...' --date=short` to see author dates. `tremko@aconsulting.sk` is not Filip but is also unwanted on Asseco (should be `tremko@adit.sk`): report it as a warning.
 
 ## Input
 
@@ -27,7 +27,7 @@ git show <sha> | grep -inE 'zemla|žemla|filip|aconsulting'
 
 Range or branch `<R>`:
 ```bash
-git log --format='%an <%ae> | %cn <%ce>' <R> | sort -u
+git log --format='%ad %an <%ae> | %cn <%ce>' --date=short <R> | sort -u
 git log --format='%H%n%B' <R> | grep -inE 'filip|zemla|žemla|aconsulting|co-authored|signed-off'
 git diff <range-base>...<tip> | grep -inE 'filip|zemla|žemla|aconsulting|@author'
 ```

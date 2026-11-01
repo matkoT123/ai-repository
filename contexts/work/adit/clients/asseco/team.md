@@ -7,7 +7,7 @@ Names as they appear in Slack, Teams and Jira. Git rules about who may appear in
 |---|---|
 | Martin Tremko (user) | Android dev on VSZP, J&T mToken, SLSP, SDK. Access to Adit and Asseco git. Commit identity `tremko@adit.sk`. |
 | Vladimir (Vlado) Jurenka, "vjurenka" | Lead/main programmer. Access to both gits, allowed Asseco author. Wrote the Dependency-Track CI. |
-| Filip Žemla | Android dev. Adit git only. Did VSZP UI and blind-friendly work, mToken SDK integration (`task/*` branches), sends patches. Must never appear in Asseco git. |
+| Filip Žemla | Android dev. Asseco colleague since 2026-10-20, pushes to Asseco himself as `zemla@adit.sk` (e.g. VSZP MR !1172). Did VSZP UI and blind-friendly work, mToken SDK integration (`task/*` branches). His commits before 2026-10-20 must not reach Asseco as-is (`rules/git-asseco.md`). |
 | Karci | Adit management. |
 
 ## Asseco / client side

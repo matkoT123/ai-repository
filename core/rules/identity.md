@@ -18,5 +18,5 @@
 | Andrej Razus | Professionals, Vendy, skolky, ucimInak (GitHub org ARULIFE) |
 | Cunikova | meetnity |
 | Vladimir (Vlado) Jurenka | Adit colleague, allowed Asseco commit author |
-| Filip Zemla | Adit colleague, must never appear in Asseco git (see work rules) |
+| Filip Zemla | Adit colleague, allowed in Asseco git only for commits from 2026-10-20 (see work rules) |
 | Karci | Adit management |

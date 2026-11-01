@@ -30,20 +30,23 @@ Remote names can change. Before any remote operation, read `git remote -v` and d
 - Identical full SHA on both sides proves identical author/committer; no need to inspect the Asseco side further.
 
 ## Allowed authors
-- Asseco git: only `Martin Tremko <tremko@adit.sk>` and Vladimir Jurenka. Nothing else as author or committer.
-- Filip Zemla and any `aconsulting` email must never appear in Asseco git: not as author, committer, in messages, trailers, code comments, `@author` tags or files. This includes `tremko@aconsulting.sk` (GitLab web UI commits): rewrite to `tremko@adit.sk` first.
+- Asseco git: `Martin Tremko <tremko@adit.sk>`, Vladimir Jurenka, and Filip Zemla `<zemla@adit.sk>` for commits dated 2026-10-20 or later (Filip is an Asseco colleague since then and pushes to Asseco himself, e.g. VSZP MR !1172). Nothing else as author or committer.
+- Filip commits dated before 2026-10-20 (his older adit `task/*` work) never land on Asseco as-is: they arrive squashed or re-authored (section below). Check the author date when a range mixes old and new Filip commits.
+- Any `aconsulting` email must never appear in Asseco git: not as author, committer, in messages or trailers. This includes `tremko@aconsulting.sk` (GitLab web UI commits): rewrite to `tremko@adit.sk` first.
 - Adit git: Filip tolerated on side branches (`task/*`), never on `main`.
 - Never re-author a commit to a colleague (also not to Jurenka). Rewrite only to the user's own identity; leave genuine colleague commits untouched.
+- Commits by Asseco staff that already exist on the Asseco remote (e.g. Richard Janitor on a VSZP feature branch) stay as they are, with the same SHA. A rewrite must start above them.
+- Commit messages headed for Asseco must not name the Adit remote: no `Merge remote-tracking branch 'adit/develop'`, no `(adit)`. Use `Merge branch 'develop' into ...` (`git merge -m`), or fix existing ones with the commit-tree rewrite below. Check with `git log --format=%B <asseco>/<base>..HEAD | grep -i adit` next to the Filip audit.
 
 ## Filip audit (before every Asseco push command, and before anything lands on adit `main`)
-Use `/filip-audit`. Manual equivalent, all must return nothing:
+Use `/filip-audit`. Manual equivalent; Filip hits with `zemla@adit.sk` and author date 2026-10-20 or later are allowed, everything else must return nothing:
 ```
-git log --format='%an <%ae> | %cn <%ce>' <asseco>/<base>..HEAD | grep -iE 'zemla|filip|aconsulting'
+git log --format='%ad %an <%ae> | %cn <%ce>' --date=short <asseco>/<base>..HEAD | grep -iE 'zemla|filip|aconsulting'
 git log --format='%B' <asseco>/<base>..HEAD | grep -iE 'zemla|filip|aconsulting|co-authored|signed-off'
 git diff <asseco>/<base>..HEAD | grep -inE 'zemla|filip|aconsulting'
 git grep -In -i -e filip -e zemla -e 'žemla' -e aconsulting -e '@author' -- .
 ```
-`author` also matches `authorise`, `DataAuthorisationOtp`; only `@author` tags count. Any hit headed for Asseco: stop and tell the user, do not hand over the push command.
+`author` also matches `authorise`, `DataAuthorisationOtp`; only `@author` tags count. Any not-allowed hit headed for Asseco (Filip before 2026-10-20, any `aconsulting`): stop and tell the user, do not hand over the push command.
 
 ## Sync main between Adit and Asseco
 Use `/adit-asseco-sync`. Steps:
@@ -55,7 +58,7 @@ Use `/adit-asseco-sync`. Steps:
 Protected Asseco branches may reject a direct push; then the user opens an MR on Asseco.
 
 ## Bringing Filip's work to Adit main and Asseco
-Filip's commits never land as-is on Adit `main` or anywhere in Asseco. They arrive either squashed (A, B, D) or re-authored by cherry-pick (C). Pick by situation. Claude prepares and verifies; writing commands run only on the user's instruction; push is always the user.
+Applies to Filip's commits dated before 2026-10-20 (newer ones he pushes to Asseco himself, see Allowed authors). Those older commits never land as-is on Adit `main` or anywhere in Asseco. They arrive either squashed (A, B, D) or re-authored by cherry-pick (C). Pick by situation. Claude prepares and verifies; writing commands run only on the user's instruction; push is always the user.
 
 **A. CLI squash with own authorship** (one finished `task/*` branch into main):
 ```
@@ -94,10 +97,10 @@ git push --force-with-lease origin feature/<X>
 ```
 Safe while `git log feature/<X>..main` is empty.
 
-**Tools for rewriting:** `git commit-tree <tree> -p <parent> [-p <parent2>] -m "..."` with `GIT_AUTHOR_*`/`GIT_COMMITTER_*` env vars rewrites authorship or rebuilds a real merge commit while keeping trees and dates. `git filter-branch` fails on Windows (`could not open 'nul'`). Cherry-picking a merge (`-m 1`) yields a plain commit and GitLab then reports "behind"; rebuild the tip with `commit-tree` and two parents instead.
+**Tools for rewriting:** `git commit-tree <tree> -p <parent> [-p <parent2>] -m "..."` with `GIT_AUTHOR_*`/`GIT_COMMITTER_*` env vars rewrites authorship or rebuilds a real merge commit while keeping trees and dates. For a whole branch with merges (Filip commits mixed in, merge structure kept, no conflicts) use the script `vszp-patient-app/claude-materials/scripts/reauthor.sh <base> <source> <new-branch>` (VSZP repo): Filip > Martin, AI trailers and `adit` remote names dropped from messages, unchanged commits keep their SHA. Verify `git diff <source> <new-branch>` is empty. A branch checked out in another worktree cannot be moved with `git branch -f`; the user runs `reset --hard` there. `git filter-branch` fails on Windows (`could not open 'nul'`). Cherry-picking a merge (`-m 1`) yields a plain commit and GitLab then reports "behind"; rebuild the tip with `commit-tree` and two parents instead.
 
 ## Hotfix branches
-Production hotfixes branch from `master`/`main` of the Asseco remote, not from `develop`. After `git checkout -b fix/<X> <asseco>/master` run `git branch --unset-upstream`. Update the Adit `master` before pushing the branch there, otherwise the MR drags in every commit Adit's master is missing.
+Production hotfixes branch from `master`/`main` of the Asseco remote, not from `develop`. VSZP has its own `develop` > `stage` > `master` flow where production bugs start from `develop`; follow `projects/vszp.md`, Branches. After `git checkout -b fix/<X> <asseco>/master` run `git branch --unset-upstream`. Update the Adit `master` before pushing the branch there, otherwise the MR drags in every commit Adit's master is missing.
 
 ## Mirroring Asseco repos to Adit (sezam-ai)
 - Adit colleagues have no Asseco access; the Adit mirror is their only way in. Mirroring needs Asseco-side consent.
@@ -111,4 +114,4 @@ Production hotfixes branch from `master`/`main` of the Asseco remote, not from `
 | jt-mtoken, 365-mfll | `<TICKET> - Short description` (e.g. `JTSRAUTH-7505 - Terminate app on root detection...`) | `main`; Filip on `task/*`, user on `feature/*` |
 | product-mtoken-sdk / product-mtoken-android | Short imperative English (`Add optional newVerificationMode to MToken.verify()`) | `main`; `task/implementation` (Filip), `feature/JTSRAUTH-7625-implemention` |
 | SLSP | `fix(ITWORK-<n> / SEZAM-<n>): ...` or `feat: ...`; version bumps `feat: SLSP version XX.YY` | `main`; releases `stage/release-XX`, tags `slsp-release-XX.YY-yymmddNN` |
-Ticket numbers are never guessed (`core/rules/git-safety.md`). Use `/asseco-commit` for commits.
+Ticket numbers are never guessed (`core/rules/git-safety.md`). VSZP: when the ZPIS number is unknown, write only the SP number (`fix(SP97216): ...`) instead of asking. Use `/asseco-commit` for commits.
