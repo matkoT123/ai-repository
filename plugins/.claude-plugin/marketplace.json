@@ -29,8 +29,8 @@
     {
       "name": "work-skills",
       "source": "./work-skills",
-      "description": "Adit/Asseco skills: commit and sync commands, Filip audit, worklog, task description with estimate, ticket reply, daily summary, Jira comment, bug report.",
-      "version": "0.3.0"
+      "description": "Adit/Asseco skills: commit and sync commands, Filip audit, worklog, task description with estimate, ticket reply, daily summary, Jira comment, bug report, read-only Asseco Jira fetch.",
+      "version": "0.8.0"
     }
   ]
 }

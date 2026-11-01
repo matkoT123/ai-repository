@@ -10,6 +10,15 @@
     ],
     "deny": [
       "Read(//g/personal-projects/tremko/ai-logic-claude-context/secrets/*.env)",
+      "Edit(//g/personal-projects/tremko/ai-logic-claude-context/secrets/*.env)",
+      "Write(//g/personal-projects/tremko/ai-logic-claude-context/secrets/*.env)",
+      "Bash(*work.env*)",
+      "PowerShell(*work.env*)",
+      "Bash(*ASSECO_JIRA_TOKEN*)",
+      "PowerShell(*ASSECO_JIRA_TOKEN*)",
+      "Bash(*jira.acld.cloud*)",
+      "PowerShell(*jira.acld.cloud*)",
+      "WebFetch(domain:jira.acld.cloud)",
       "Read(//c/Users/marti/.ssh/**)"
     ]
   },

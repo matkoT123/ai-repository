@@ -24,8 +24,10 @@ Push rules: `rules/git.md`. Remote mapping: `clients/asseco/rules/git-asseco.md`
 | `JTSRAUTH-`, `ASB-` | J&T mToken / MFLL | Asseco Jira |
 | `SEZAM-`, `ITWORK-`, `REQ-` | SLSP mToken, SEZAM | Asseco Jira |
 - Two work Jiras exist: **one Asseco Jira** (J&T, SLSP, VSZP and others, split by project category) and **Adit's own Jira**.
-- **No Claude connection to any work Jira or Confluence.** Never connect, authenticate or call the Atlassian connector (or any API/script) against a work instance; it is too risky. The claude.ai Atlassian connector is for personal projects only (Balansee site). Work has no Confluence.
-- Work input comes as XML/PDF exports the user drops into `claude-materials/<ticket>/`; read those. Output (comments, worklogs) is text the user pastes himself (`rules/writing-sk.md`, `/jira-comment`, `/worklog`).
+- Asseco Jira is Data Center (`https://jira.acld.cloud`, v11.3), not Atlassian Cloud.
+- **Only one Claude path to a work Jira: `/work-skills:asseco-jira`, read-only, started by the user.** Its GET-only script runs only in the `claude-asseco` profile inside Asseco folders, with the PAT in `secrets/work.env: ASSECO_JIRA_TOKEN` (full user rights, expires 2027-01-20). Claude never invokes it unprompted and never reaches Asseco Jira any other way (curl, browser, MCP).
+- No connection at all to Adit's Jira. The claude.ai Atlassian connector is for personal projects only (Balansee site); never connect it to a work instance. Work has no Confluence.
+- Work input: `G:/nogames/asseco-android/claude-materials/jira/<PROJECT>/<KEY> - <summary>/task.md` + `attachments/` from the skill (index `README.md` there), or XML/PDF exports the user drops there; read those. Output (comments, worklogs) is text the user pastes himself (`rules/writing-sk.md`, `/jira-comment`, `/worklog`).
 
 ## Documentation
 - SEZAM SharePoint (DocsPublic sites ivp_sezam, JTSR_AUTH) and SECV SharePoint 2016 are mirrored read-only into `sezam-docs-mirror` (see `clients/asseco/projects/sezam-ai.md`). Cite the `source` URL from file frontmatter.

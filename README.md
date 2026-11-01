@@ -57,9 +57,11 @@ Use them in plain words ("napis worklog, dnes som ...") or directly as `/<name> 
 | `jira-comment` | Slovak Jira comment for incidents and bug analyses | "jira komentar" |
 | `bug-report` | Bug report, developer or tester variant | "bug report" |
 | `asseco-commit` | Squash commit with the correct author, prints push commands | "commit do asseca" |
+| `asseco-task-flow` | Bugfix or new task end to end: branch, fetch, merge base branch (VSZP develop, J&T/SLSP main), fix, build, device test, worklog with estimate, commit, push command | "oprav to", "novy task" |
 | `adit-asseco-sync` | Fast-forward sync of a branch between remotes, prints push command | "sync adit asseco" |
 | `filip-audit` | Read-only check that a colleague's traces are not in Asseco-bound commits | "filip audit" |
 | `resync-colleague-branch` | Cherry-pick a colleague's new commits into the re-authored copy | "dosync filipa" |
+| `asseco-jira` | Read-only Asseco Jira sync into `G:/nogames/asseco-android/claude-materials/jira/` (folder per task, `task.md` with SP, parent, comments). Only in `claude-asseco`, only typed by the user, never by plain words | `/work-skills:asseco-jira` (all my tasks), `... ZPHD-37426`, `... ZPHD-37426 attachments`, `... list` |
 | `server-check` (personal) | Read-only Balansee production server health check over SSH | "skontroluj server" |
 
 ## Changing a plugin
