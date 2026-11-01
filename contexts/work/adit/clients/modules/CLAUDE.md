@@ -41,6 +41,9 @@ Inactive since autumn 2025. Last commits: uaa-be and codelist-be 2025-10-09 (BKD
 - `sample` package seeds demo data. Error messages localised in `messages/error-messages[_sk].properties`.
 - audit-be was the reference for Balansee's `balansee-audit` (see memory `D--ACONSULTING-PROJECTS-MODULES-audit-audit-be`).
 
+## Refresher doc
+Architecture, flow and deploy diagrams for MODULES + ROSA (UAA/Keycloak federation, common-be security and Rabbit sync, ntf, audit, compose stack, CI > registry > reload.sh, 25 known gaps): `G:/personal-projects/tremko/materialy-na-interview-studying/modules-diagrams/MODULES-OVERVIEW.pdf` (+ `.html`, `.md` source). Written 2026-10-16. Keep it only there, not in the module folders.
+
 ## Open questions
 - Where do doc-be, modules-fe and spring-admin live? Not cloned locally.
 - Is the platform still maintained, and which product besides Bookadlo runs on it in production?

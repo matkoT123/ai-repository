@@ -29,9 +29,21 @@ Test logins: `secrets/work.env: VSZP_TEST_USER, VSZP_TEST_PASSWORD, VSZP_HLT_SMS
 ### Integration switch (local only, never staged)
 - "ROZ"/"BUD" for `asseco_vpn`: swap the host in both `centralUrl` and `assecoOnboardingUrl`.
 
-## Branches
-- `develop`: integration branch for MRs. `master`: production; hotfixes branch from `origin/master` (see `rules/git-asseco.md`).
-- Feature: `feature/SP<n>-ZPIS-<n>-<desc>`; fixes `fix/...`; old `build/SP...` branches for specific deliveries.
+## Branches and release flow (from the release manager, 2026-10-16)
+Three long-lived branches: `develop` > `stage` > `master`. The user has Maintainer access on the Asseco VSZP repo since 2026-10-16; Claude still never pushes or merges there.
+
+| Stage | Branch from | MR target | Build |
+|---|---|---|---|
+| New feature or bug reported from production | `develop` | `develop`, merged only after the go-ahead for a demo build | - |
+| Demo release | `develop` merged into `stage` | - | demo build (ZLP3) from `stage` > VšZP testers |
+| Bug found by VšZP in the demo build | `stage` | `stage`, merged once all fixes are done and the corrected build may be sent | new demo build from `stage` |
+| VšZP approves the demo | `stage` merged into `master`, and `stage` merged into `develop` | - | beta build (HLP, production server) and AAB from `master` |
+| Bug found in the beta build (rare) | `master` | `master` | new version from `master`; then `master` > `stage` > `develop` |
+
+- Feature MRs wait open until the demo build is approved to start; do not expect them merged into `develop` right away.
+- Back-merges always go down the chain: `master` > `stage` > `develop`, so `develop` stays up to date.
+- Naming: feature `feature/SP<n>-ZPIS-<n>-<desc>`; fixes `fix/...`; old `build/SP...` branches for specific deliveries.
+- Before creating a branch, ask which phase the bug belongs to (production report > `develop`, demo test > `stage`, beta test > `master`); never default to `master`.
 - `feat/SP97302-...-v-MA` is dead; the SP97302 integration branch was `feature/SP97302-ZPIS-90284-stav-zasob-liekov-v-MA`.
 - Blind friendly work: `feature/ZPIS-98427-SP100763-blind-friendly` (re-host of Filip's `adit/task/ZPIS-98427`, recipe B in `rules/git-asseco.md`).
 
