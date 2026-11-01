@@ -6,4 +6,5 @@
 - Show only changed parts of code, not whole files.
 - Always end with a short summary of what changed and why, even for small fixes.
 - Before running a tool, say in one sentence what you are about to do and why. If the user rejects calls repeatedly, give the commands as text instead.
+- Texts the user will paste (Slack/Teams replies, worklogs, Jira comments, tester notes): never as a `>` blockquote (it shows as a bar on the left), never with leading bullets. Plain paragraph in chat, and copy it to the clipboard with `Set-Clipboard` (PowerShell) so no terminal indentation is pasted.
 - Never write "as if done" reports. Summaries, worklogs and status reports describe only real, verifiable work.

@@ -9,7 +9,11 @@ Produce a task title for the timesheet and a time estimate. Nothing else around 
 
 ## Style
 
-- Imperfective verbal nouns (-anie / -ovanie), as the user wants it: "Prerábanie obnovy tokenu na SDK", "Upratovanie logovania", "Odstraňovanie starých REST volaní", "Písanie unit testov". Not past participles ("Migrovaná obnova", "Upratané logovanie"), not perfective nouns ("Upratanie", "Oprava"), not "sme" or "som". The user finds those robotic.
+- Action nouns, using the form a Slovak developer would naturally say:
+  - Ongoing or repeated work takes the -anie form: "Hľadanie", "Písanie unit testov", "Upratovanie logovania", "Prerábanie obnovy tokenu na SDK".
+  - Where a common short noun exists, use it instead of a forced -ovanie form: "oprava" (not "opravovanie"), "analýza" (not "analyzovanie"), "overenie" (not "overovanie"), "pridanie", "úprava", "kontrola", "doplnenie".
+  - Never past participles ("Migrovaná obnova", "Upratané logovanie"), never "sme" or "som". The user finds those robotic.
+  - Confirmed by the user (2026-10-19): "Hľadanie a oprava pádu aplikácie pri štarte po expirácii testovacích TLS certifikátov. Analýza prázdneho truststore po SSLTrustManager, pridanie fallbacku na pribalený truststore v MTokenConfigFactory, písanie unit testov a overenie na zariadení"
 - Natural wording, the way a developer says it to a colleague: "aby sa chyby zo SDK nelogovali dvakrát" instead of "zdeduplikované logovanie".
 - Length: a title, then one sentence of 2 to 4 activities joined by commas and "a". Roughly 200 to 300 characters per task. Name the main class or SDK function once (`AccessTokenRepository`, `mToken.authenticateFirstLevel()`), but leave out lists of endpoints, DTOs, counts of tests or call sites, and internal details such as cache timeouts.
 - Ticket prefix `<TICKET> - ` when the user gives one.
@@ -39,8 +43,8 @@ The terminal indents every line of a reply, so text copied from the chat carries
 3. If the clipboard call fails, say so and show the text in a code block as a fallback.
 
 Example (one task split into two):
-<TICKET> - Prerábanie obnovy tokenu na SDK a odstraňovanie nepoužívaného podpisovania. Prepisovanie AccessTokenRepository do Kotlinu nad mToken.authenticateFirstLevel(), odstraňovanie starých REST volaní a písanie unit testov
+<TICKET> - Prerábanie obnovy tokenu na SDK a odstránenie nepoužívaného podpisovania. Prepis AccessTokenRepository do Kotlinu nad mToken.authenticateFirstLevel(), odstránenie starých REST volaní a písanie unit testov
 Odhad: 4h
 
-<TICKET> - Upratovanie logovania, aby sa chyby zo SDK nelogovali dvakrát. Prechádzanie logovania v aplikácii a v SDK, odstraňovanie duplicitných záznamov na server a spisovanie podkladu pre analytikov, čo aplikácia loguje a prečo to nepatrí do SDK
+<TICKET> - Upratovanie logovania, aby sa chyby zo SDK nelogovali dvakrát. Kontrola logovania v aplikácii a v SDK, odstránenie duplicitných záznamov na server a spísanie podkladu pre analytikov, čo aplikácia loguje a prečo to nepatrí do SDK
 Odhad: 4h

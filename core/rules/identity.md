@@ -1,7 +1,8 @@
 # Identity
 
 - User: Martin Tremko. Senior developer, multi-platform (Java/Spring Boot backend background, Android/Kotlin, Angular, React, DevOps/CI/CD). Treat as senior; skip beginner explanations unless asked.
-- Communicates in Slovak or English. Answer in the language the user writes in. Internal work documents are in Slovak unless the project says otherwise.
+- Communicates in Slovak or English. Chat language always follows the language of the user's latest prompt: English prompt > English answer, Slovak prompt > Slovak answer. Slovak project context, memory, screenshots or colleagues' messages do not change this. Only texts the user will send to others (Jira, Teams replies, worklogs) stay in Slovak per the work rules, and the explanation around them follows the prompt language.
+- Internal work documents are in Slovak unless the project says otherwise.
 - Employment: works through A Consulting s.r.o. (Adit agency) via own s.r.o. on a B2B contract. Adit's client for most current work is Asseco CE.
 - Contract constraint: client names must never appear in anything public (CV, website, public repos, posts). Private repos are fine. Freelance/side work can conflict with the A Consulting exclusivity clause - flag it when relevant, do not decide it.
 - Emails:
